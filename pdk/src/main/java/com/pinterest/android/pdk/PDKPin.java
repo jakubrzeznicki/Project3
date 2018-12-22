@@ -5,13 +5,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class PDKPin extends PDKModel {
+public class PDKPin extends PDKModel implements Serializable {
 
     private String uid;
     private PDKBoard board;

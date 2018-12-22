@@ -17,6 +17,37 @@
         android:orientation="vertical"
         android:layout_centerInParent="true">
 
+        <LinearLayout
+            android:id="@+id/linearLayId"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgload"
+                android:layout_width="180dp"
+                android:layout_height="160dp" />
+
+            <TextView
+                android:id="@+id/nameId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/lastnmId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/bioId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
         <Button
             android:onClick="CLick"
             android:layout_width="match_parent"
@@ -26,6 +57,55 @@
             android:gravity="center"
             android:background="#a51717"
             android:textColor="#FFF"/>
+
+        <Button
+           android:id="@+id/go_to_pins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Pins"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="#a51717"
+            android:layout_gravity="center"
+            android:textColor="#FFF"/>
+
+        <Button
+            android:id="@+id/go_to_boards"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Boards"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="#a51717"
+            android:layout_gravity="center"
+            android:textColor="#FFF"/>
+        <Button
+        android:id="@+id/go_to_create_board"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Create Board"
+        android:textSize="15sp"
+        android:gravity="center"
+        android:background="#a51717"
+        android:layout_gravity="center"
+        android:textColor="#FFF"/>
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Logout"
+            android:textSize="15sp"
+            android:gravity="center"
+            android:background="#a51717"
+            android:layout_gravity="center"
+            android:textColor="#FFF"/>
+
+
     </LinearLayout>
 
 </RelativeLayout>
