@@ -2,27 +2,27 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/activity_main"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearLayId"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/imgload"
@@ -49,61 +49,62 @@
 
 
         <Button
-            android:onClick="CLick"
+            android:id="@+id/login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login with Pinterest"
-            android:textSize="20sp"
-            android:gravity="center"
             android:background="#a51717"
-            android:textColor="#FFF"/>
+            android:gravity="center"
+            android:text="Login with Pinterest"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
 
         <Button
-           android:id="@+id/go_to_pins"
+            android:id="@+id/go_to_pins"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Pins"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:background="#a51717"
             android:layout_gravity="center"
-            android:textColor="#FFF"/>
+            android:layout_marginTop="30dp"
+            android:background="#a51717"
+            android:gravity="center"
+            android:text="Pins"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/go_to_boards"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Boards"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:background="#a51717"
             android:layout_gravity="center"
-            android:textColor="#FFF"/>
+            android:layout_marginTop="30dp"
+            android:background="#a51717"
+            android:gravity="center"
+            android:text="Boards"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
+
         <Button
-        android:id="@+id/go_to_create_board"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Create Board"
-        android:textSize="15sp"
-        android:gravity="center"
-        android:background="#a51717"
-        android:layout_gravity="center"
-        android:textColor="#FFF"/>
+            android:id="@+id/go_to_create_board"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:background="#a51717"
+            android:gravity="center"
+            android:text="Create Board"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="Logout"
-            android:textSize="15sp"
-            android:gravity="center"
-            android:background="#a51717"
             android:layout_gravity="center"
-            android:textColor="#FFF"/>
+            android:layout_marginTop="30dp"
+            android:background="#a51717"
+            android:gravity="center"
+            android:text="Logout"
+            android:textColor="#FFF"
+            android:textSize="15sp" />
 
 
     </LinearLayout>

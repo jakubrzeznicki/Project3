@@ -29,19 +29,18 @@ public class MainActivity extends AppCompatActivity {
     PDKClient pdkClient;
     PDKUser user;
 
-    final String appId = "5006082538307877555";
-    private List<PDKPin> pinsList;
-    private List<PDKBoard> boardsList;
-    LinearLayout linearLayout;
-    ImageView profileImg;
-    TextView fname, lname, bio;
-    private Button goToPins;
-    private Button goToCreateBoard;
-    private Button goToBoards;
-    private Button logout;
+    private final String appId = "5006082538307877555";
     private final String PROFILE_FIELDS = "id, image, counts, created_at, first_name, last_name, bio";
     private final String PIN_FIELDS = "id, link, note, image";
     private final String BOARDS_FIELDS = "id, name, description, counts";
+
+    private List<PDKPin> pinsList;
+    private List<PDKBoard> boardsList;
+    private LinearLayout linearLayout;
+    private ImageView profileImg;
+    private TextView fname, lname, bio;
+    private Button goToPins, goToCreateBoard, goToBoards, logout, login;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
 
         pdkClient = PDKClient.configureInstance(this, appId);
         pdkClient.onConnect(this);
+
+        loginOnPinterest();
         PinsListOnClick();
         CreateBoardOnClick();
         BoardsListOnClick();
@@ -69,28 +70,35 @@ public class MainActivity extends AppCompatActivity {
         goToCreateBoard = (Button) findViewById(R.id.go_to_create_board);
         goToBoards = (Button) findViewById(R.id.go_to_boards);
         logout = (Button) findViewById(R.id.logout);
+        login = (Button) findViewById(R.id.login);
     }
 
-    public void CLick(View view) {
+    private void loginOnPinterest() {
 
-        List list = new ArrayList<String>();
-        list.add(PDKClient.PDKCLIENT_PERMISSION_READ_PUBLIC);
-        list.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PUBLIC);
-
-        pdkClient.login(this, list, new PDKCallback() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onSuccess(PDKResponse response) {
-                Log.d(getClass().getName(), response.getData().toString());
-                setProfileInformation();
-                setPins();
-                setBoards();
-            }
+            public void onClick(View v) {
+                List list = new ArrayList<String>();
+                list.add(PDKClient.PDKCLIENT_PERMISSION_READ_PUBLIC);
+                list.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PUBLIC);
 
-            @Override
-            public void onFailure(PDKException exception) {
-                Log.e(getClass().getName(), exception.getDetailMessage());
+                pdkClient.login(MainActivity.this, list, new PDKCallback() {
+                    @Override
+                    public void onSuccess(PDKResponse response) {
+                        Log.d(getClass().getName(), response.getData().toString());
+                        setProfileInformation();
+                        setPins();
+                        setBoards();
+                    }
+
+                    @Override
+                    public void onFailure(PDKException exception) {
+                        Log.e(getClass().getName(), exception.getDetailMessage());
+                    }
+                });
             }
         });
+
 
     }
 
@@ -129,7 +137,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(PDKResponse response) {
                         pinsList = response.getPinList();
-
                     }
 
                     @Override
@@ -147,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(PDKResponse response) {
                 boardsList = response.getBoardList();
-
             }
 
             @Override
@@ -174,7 +180,6 @@ public class MainActivity extends AppCompatActivity {
         goToCreateBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Intent intent = new Intent(MainActivity.this, CreateNewBoardActivity.class);
                 Intent intent = new Intent(MainActivity.this, CreateNewPinActivity.class);
                 startActivity(intent);
             }

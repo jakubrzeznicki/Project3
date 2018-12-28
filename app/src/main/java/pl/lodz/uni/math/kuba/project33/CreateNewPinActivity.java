@@ -28,9 +28,6 @@ import java.net.URLEncoder;
 
 public class CreateNewPinActivity extends AppCompatActivity {
 
-    private final int CAMERA = 2000;
-    private final int GALLERY = 1000;
-
     private Button addPinButton;
     private EditText pinNameEditText;
     private EditText pinImageUrlEditText;

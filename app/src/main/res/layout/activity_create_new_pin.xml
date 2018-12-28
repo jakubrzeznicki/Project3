@@ -9,13 +9,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/pin_name_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nazwa pinu" />
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:hint="nazwa" />
 
 
 
@@ -23,20 +26,24 @@
             android:id="@+id/pin_link_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Link do strony" />
+            android:layout_marginBottom="20dp"
+            android:hint="link do strony" />
 
         <EditText
             android:id="@+id/pin_image_url_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Link do zdjecia" />
+            android:layout_marginBottom="20dp"
+            android:hint="link do zdjecia" />
 
 
         <Button
             android:id="@+id/add_new_pin_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dodaj" />
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#FFFFFF"
+            android:text="ZAPISZ" />
     </LinearLayout>
 
 </LinearLayout>

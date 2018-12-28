@@ -39,7 +39,6 @@ public class PinsAdapterRecyclerView extends RecyclerView.Adapter<PinsAdapterRec
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.link.setText(items.get(i).getLink());
         viewHolder.note.setText("Nazwa: " + items.get(i).getNote());
         Glide.with(mContext).load(items.get(i).getImageUrl()).into(viewHolder.image);
 
@@ -60,13 +59,11 @@ public class PinsAdapterRecyclerView extends RecyclerView.Adapter<PinsAdapterRec
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView image;
-        private TextView link;
         private TextView note;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.pin_image);
-            link = (TextView) itemView.findViewById(R.id.pin_link);
             note = (TextView) itemView.findViewById(R.id.pin_note);
 
         }
