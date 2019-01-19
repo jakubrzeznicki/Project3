@@ -1,4 +1,4 @@
-package pl.lodz.uni.math.kuba.project33;
+package pl.lodz.uni.math.kuba.project33.pinterest.pin;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,44 +10,43 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.pinterest.android.pdk.PDKPin;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import pl.lodz.uni.math.kuba.project33.R;
+
 public class PinsAdapterRecyclerView extends RecyclerView.Adapter<PinsAdapterRecyclerView.ViewHolder> {
+    private List<PDKPin> items;
+    private Context context;
 
-    private List<PDKPin> items = new ArrayList<>();
-    private Context mContext;
-
-    public PinsAdapterRecyclerView(List<PDKPin> items, Context mContext) {
+    public PinsAdapterRecyclerView(List<PDKPin> items, Context context) {
         this.items = items;
-        this.mContext = mContext;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view;
-        LayoutInflater mInflater = LayoutInflater.from(mContext);
+        LayoutInflater mInflater = LayoutInflater.from(context);
         view = mInflater.inflate(R.layout.pin_item, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
-        viewHolder.note.setText("Nazwa: " + items.get(i).getNote());
-        Glide.with(mContext).load(items.get(i).getImageUrl()).into(viewHolder.image);
+        viewHolder.pinNote.setText(items.get(i).getNote());
+        Glide.with(context).load(items.get(i).getImageUrl()).into(viewHolder.pinImage);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(items.get(i).getLink()));
-                mContext.startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }
@@ -58,14 +57,13 @@ public class PinsAdapterRecyclerView extends RecyclerView.Adapter<PinsAdapterRec
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView image;
-        private TextView note;
+        private ImageView pinImage;
+        private TextView pinNote;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.pin_image);
-            note = (TextView) itemView.findViewById(R.id.pin_note);
-
+            pinImage = (ImageView) itemView.findViewById(R.id.pin_image);
+            pinNote = (TextView) itemView.findViewById(R.id.pin_note);
         }
     }
 

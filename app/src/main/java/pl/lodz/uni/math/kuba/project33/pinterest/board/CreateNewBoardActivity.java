@@ -1,4 +1,4 @@
-package pl.lodz.uni.math.kuba.project33;
+package pl.lodz.uni.math.kuba.project33.pinterest.board;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,35 +13,37 @@ import com.pinterest.android.pdk.PDKClient;
 import com.pinterest.android.pdk.PDKException;
 import com.pinterest.android.pdk.PDKResponse;
 
+import pl.lodz.uni.math.kuba.project33.R;
+
 public class CreateNewBoardActivity extends AppCompatActivity {
 
-    private EditText boardNameEditText;
-    private EditText boardDescriptionEditText;
-    private Button addNewBoardButton;
+    private EditText boardName;
+    private EditText boardDescription;
+    private Button addNewBoardBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_board);
 
-        init();
+        initializeVariables();
 
         addNewBoardOnClick();
     }
 
-    private void init() {
-        boardNameEditText = (EditText) findViewById(R.id.board_name_edit_text);
-        boardDescriptionEditText = (EditText) findViewById(R.id.board_description_edit_text);
-        addNewBoardButton = (Button) findViewById(R.id.add_new_board_button);
+    private void initializeVariables() {
+        boardName = (EditText) findViewById(R.id.board_name_edit_text);
+        boardDescription = (EditText) findViewById(R.id.board_description_edit_text);
+        addNewBoardBtn = (Button) findViewById(R.id.add_new_board_button);
     }
 
     private void addNewBoardOnClick() {
-        addNewBoardButton.setOnClickListener(new View.OnClickListener() {
+        addNewBoardBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String boardName = boardNameEditText.getText().toString();
-                String boardDesc = boardDescriptionEditText.getText().toString();
-                PDKClient.getInstance().createBoard(boardName, boardDesc, new PDKCallback() {
+                String name = boardName.getText().toString();
+                String description = boardDescription.getText().toString();
+                PDKClient.getInstance().createBoard(name, description, new PDKCallback() {
                     @Override
                     public void onSuccess(PDKResponse response) {
                         Log.d(getClass().getName(), response.getData().toString());

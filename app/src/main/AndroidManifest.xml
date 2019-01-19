@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
-        <activity android:name=".MainActivity">
+        <activity android:name=".pinterest.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,10 +29,10 @@
                 <data android:scheme="pdk{5006082538307877555}" />
             </intent-filter>
         </activity>
-        <activity android:name=".PinsActivity" />
-        <activity android:name=".CreateNewBoardActivity" />
-        <activity android:name=".CreateNewPinActivity" />
-        <activity android:name=".BoardsActivity"></activity>
+        <activity android:name=".pinterest.pin.PinsActivity" />
+        <activity android:name=".pinterest.board.CreateNewBoardActivity" />
+        <activity android:name=".pinterest.pin.CreateNewPinActivity" />
+        <activity android:name=".pinterest.board.BoardsActivity"></activity>
     </application>
 
 </manifest>

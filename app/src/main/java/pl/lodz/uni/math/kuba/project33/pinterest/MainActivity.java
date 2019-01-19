@@ -1,7 +1,6 @@
-package pl.lodz.uni.math.kuba.project33;
+package pl.lodz.uni.math.kuba.project33.pinterest;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,21 +24,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    PDKClient pdkClient;
-    PDKUser user;
+import pl.lodz.uni.math.kuba.project33.R;
+import pl.lodz.uni.math.kuba.project33.pinterest.board.BoardsActivity;
+import pl.lodz.uni.math.kuba.project33.pinterest.pin.CreateNewPinActivity;
+import pl.lodz.uni.math.kuba.project33.pinterest.pin.PinsActivity;
 
-    private final String appId = "5006082538307877555";
-    private final String PROFILE_FIELDS = "id, image, counts, created_at, first_name, last_name, bio";
+public class MainActivity extends AppCompatActivity {
+    private final String APP_ID = "5006082538307877555";
+    private final String PROFILE_FIELDS = "id, image, counts, created_at, first_name, last_name";
     private final String PIN_FIELDS = "id, link, note, image";
     private final String BOARDS_FIELDS = "id, name, description, counts";
+
+    private PDKClient pdkClient;
+    private PDKUser pdkUser;
 
     private List<PDKPin> pinsList;
     private List<PDKBoard> boardsList;
     private LinearLayout linearLayout;
-    private ImageView profileImg;
-    private TextView fname, lname, bio;
-    private Button goToPins, goToCreateBoard, goToBoards, logout, login;
+    private ImageView profileImage;
+    private TextView firstName, lastName;
+    private Button goToPinsActivity, goToCreateBoardActivity, goToBoardsActivity, logout, login;
 
 
     @Override
@@ -47,48 +51,46 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        init();
+        initializeVariables();
 
-        pdkClient = PDKClient.configureInstance(this, appId);
+        pdkClient = PDKClient.configureInstance(this, APP_ID);
         pdkClient.onConnect(this);
 
         loginOnPinterest();
-        PinsListOnClick();
-        CreateBoardOnClick();
-        BoardsListOnClick();
+        showPinsList();
+        createBoard();
+        showBoardList();
         logoutOnClick();
     }
 
-    private void init() {
-        linearLayout = (LinearLayout) findViewById(R.id.linearLayId);
-        profileImg = (ImageView) findViewById(R.id.imgload);
-        fname = (TextView) findViewById(R.id.nameId);
-        lname = (TextView) findViewById(R.id.lastnmId);
-        bio = (TextView) findViewById(R.id.bioId);
+    private void initializeVariables() {
+        linearLayout = (LinearLayout) findViewById(R.id.linear_layout_main);
+        profileImage = (ImageView) findViewById(R.id.profile_image_iv);
+        firstName = (TextView) findViewById(R.id.profile_first_name_tv);
+        lastName = (TextView) findViewById(R.id.profile_last_name_tv);
 
-        goToPins = (Button) findViewById(R.id.go_to_pins);
-        goToCreateBoard = (Button) findViewById(R.id.go_to_create_board);
-        goToBoards = (Button) findViewById(R.id.go_to_boards);
-        logout = (Button) findViewById(R.id.logout);
-        login = (Button) findViewById(R.id.login);
+        goToPinsActivity = (Button) findViewById(R.id.go_to_pins_list_button);
+        goToCreateBoardActivity = (Button) findViewById(R.id.go_to_create_board_button);
+        goToBoardsActivity = (Button) findViewById(R.id.go_to_boards_list_button);
+        logout = (Button) findViewById(R.id.logout_button);
+        login = (Button) findViewById(R.id.login_with_pinterest_button);
     }
 
     private void loginOnPinterest() {
-
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List list = new ArrayList<String>();
-                list.add(PDKClient.PDKCLIENT_PERMISSION_READ_PUBLIC);
-                list.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PUBLIC);
+                List permissionList = new ArrayList<String>();
+                permissionList.add(PDKClient.PDKCLIENT_PERMISSION_READ_PUBLIC);
+                permissionList.add(PDKClient.PDKCLIENT_PERMISSION_WRITE_PUBLIC);
 
-                pdkClient.login(MainActivity.this, list, new PDKCallback() {
+                pdkClient.login(MainActivity.this, permissionList, new PDKCallback() {
                     @Override
                     public void onSuccess(PDKResponse response) {
                         Log.d(getClass().getName(), response.getData().toString());
                         setProfileInformation();
-                        setPins();
-                        setBoards();
+                        setPinsList();
+                        setBoardsList();
                     }
 
                     @Override
@@ -109,18 +111,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setProfileInformation() {
-
         linearLayout.setVisibility(View.VISIBLE);
         PDKClient.getInstance().getMe(PROFILE_FIELDS, new PDKCallback() {
 
             @Override
             public void onSuccess(PDKResponse response) {
-                user = response.getUser();
-                fname.setText("First Name: " + user.getFirstName());
-                lname.setText("Last Name: " + user.getLastName());
-                bio.setText("Bio: " + user.getBio());
-
-                Glide.with(MainActivity.this).load(user.getImageUrl()).into(profileImg);
+                pdkUser = response.getUser();
+                firstName.setText("First Name: " + pdkUser.getFirstName());
+                lastName.setText("Last Name: " + pdkUser.getLastName());
+                Glide.with(MainActivity.this).load(pdkUser.getImageUrl()).into(profileImage);
             }
 
             @Override
@@ -130,8 +129,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void setPins() {
+    private void setPinsList() {
         pinsList = new ArrayList<>();
         PDKClient.getInstance().getMyPins(PIN_FIELDS, new PDKCallback() {
                     @Override
@@ -148,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setBoards() {
+    private void setBoardsList() {
         boardsList = new ArrayList<>();
         PDKClient.getInstance().getMyBoards(BOARDS_FIELDS, new PDKCallback() {
             @Override
@@ -164,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void PinsListOnClick() {
-        goToPins.setOnClickListener(new View.OnClickListener() {
+    public void showPinsList() {
+        goToPinsActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PinsActivity.class);
@@ -176,8 +174,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void CreateBoardOnClick() {
-        goToCreateBoard.setOnClickListener(new View.OnClickListener() {
+    public void createBoard() {
+        goToCreateBoardActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CreateNewPinActivity.class);
@@ -186,8 +184,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void BoardsListOnClick() {
-        goToBoards.setOnClickListener(new View.OnClickListener() {
+    public void showBoardList() {
+        goToBoardsActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BoardsActivity.class);

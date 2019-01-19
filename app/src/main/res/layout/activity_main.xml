@@ -9,7 +9,7 @@
     android:paddingTop="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
-    tools:context=".MainActivity">
+    tools:context=".pinterest.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,30 +18,24 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/linearLayId"
+            android:id="@+id/linear_layout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/imgload"
+                android:id="@+id/profile_image_iv"
                 android:layout_width="180dp"
                 android:layout_height="160dp" />
 
             <TextView
-                android:id="@+id/nameId"
+                android:id="@+id/profile_first_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/lastnmId"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-            <TextView
-                android:id="@+id/bioId"
+                android:id="@+id/profile_last_name_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -49,7 +43,7 @@
 
 
         <Button
-            android:id="@+id/login"
+            android:id="@+id/login_with_pinterest_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#a51717"
@@ -59,7 +53,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/go_to_pins"
+            android:id="@+id/go_to_pins_list_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -71,7 +65,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/go_to_boards"
+            android:id="@+id/go_to_boards_list_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -83,7 +77,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/go_to_create_board"
+            android:id="@+id/go_to_create_board_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -95,7 +89,7 @@
             android:textSize="15sp" />
 
         <Button
-            android:id="@+id/logout"
+            android:id="@+id/logout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
