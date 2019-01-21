@@ -15,6 +15,8 @@ import com.pinterest.android.pdk.PDKResponse;
 
 import pl.lodz.uni.math.kuba.project33.R;
 
+import static pl.lodz.uni.math.kuba.project33.pinterest.board.BoardsAdapterRecyclerView.BOARD_ID;
+
 public class CreateNewPinActivity extends AppCompatActivity {
     private Button addPinBtn;
     private EditText pinName;
@@ -29,8 +31,6 @@ public class CreateNewPinActivity extends AppCompatActivity {
 
         initializeVariables();
 
-        boardId = getIntent().getStringExtra("BOARD_ID");
-
         addPinOnClick();
     }
 
@@ -39,6 +39,7 @@ public class CreateNewPinActivity extends AppCompatActivity {
         pinName = (EditText) findViewById(R.id.pin_name_edit_text);
         pinImageUrl = (EditText) findViewById(R.id.pin_image_url_edit_text);
         pinLink = (EditText) findViewById(R.id.pin_link_edit_text);
+        boardId = getIntent().getStringExtra(BOARD_ID);
     }
 
     private void setPin() {
@@ -50,7 +51,7 @@ public class CreateNewPinActivity extends AppCompatActivity {
             @Override
             public void onSuccess(PDKResponse response) {
                 Log.d(getClass().getName(), response.getData().toString());
-                Toast.makeText(CreateNewPinActivity.this, "Dodano noweg pina", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateNewPinActivity.this, "Dodano nowego pina", Toast.LENGTH_SHORT).show();
             }
 
             @Override

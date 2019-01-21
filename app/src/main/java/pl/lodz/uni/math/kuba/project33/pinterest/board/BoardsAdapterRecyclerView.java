@@ -18,6 +18,7 @@ import pl.lodz.uni.math.kuba.project33.R;
 import pl.lodz.uni.math.kuba.project33.pinterest.pin.CreateNewPinActivity;
 
 public class BoardsAdapterRecyclerView extends RecyclerView.Adapter<BoardsAdapterRecyclerView.ViewHolder> {
+    public static final String BOARD_ID = "BOARD_ID";
     private List<PDKBoard> items;
     private Context context;
 
@@ -46,7 +47,7 @@ public class BoardsAdapterRecyclerView extends RecyclerView.Adapter<BoardsAdapte
             public void onClick(View v) {
                 String idBoard = items.get(i).getUid();
                 Intent intent = new Intent(context, CreateNewPinActivity.class);
-                intent.putExtra("BOARD_ID", idBoard);
+                intent.putExtra(BOARD_ID, idBoard);
                 context.startActivity(intent);
             }
         });

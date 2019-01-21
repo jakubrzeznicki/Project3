@@ -12,6 +12,8 @@ import java.util.List;
 
 import pl.lodz.uni.math.kuba.project33.R;
 
+import static pl.lodz.uni.math.kuba.project33.pinterest.MainActivity.BOARD_LIST;
+
 public class BoardsActivity extends AppCompatActivity {
     private RecyclerView boardListRecyclerView;
     private BoardsAdapterRecyclerView boardsAdapterRecyclerView;
@@ -24,7 +26,7 @@ public class BoardsActivity extends AppCompatActivity {
 
         boardList = new ArrayList<>();
 
-        boardList = (List<PDKBoard>) getIntent().getSerializableExtra("BOARDS_LIST");
+        boardList = (List<PDKBoard>) getIntent().getSerializableExtra(BOARD_LIST);
 
         boardListRecyclerView = (RecyclerView) findViewById(R.id.boards_list_recycler_view);
         boardListRecyclerView.setHasFixedSize(true);

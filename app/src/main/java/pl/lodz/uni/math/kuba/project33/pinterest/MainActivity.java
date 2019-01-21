@@ -30,8 +30,10 @@ import pl.lodz.uni.math.kuba.project33.pinterest.pin.CreateNewPinActivity;
 import pl.lodz.uni.math.kuba.project33.pinterest.pin.PinsActivity;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String PINS_LIST = "PINS_LIST";
+    public static final String BOARD_LIST = "BOARD_LIST";
     private final String APP_ID = "5006082538307877555";
-    private final String PROFILE_FIELDS = "id, image, counts, created_at, first_name, last_name";
+    private final String PROFILE_FIELDS = "id, image, first_name, last_name";
     private final String PIN_FIELDS = "id, link, note, image";
     private final String BOARDS_FIELDS = "id, name, description, counts";
 
@@ -167,9 +169,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PinsActivity.class);
-                intent.putExtra("PINS_LIST", (Serializable) pinsList);
+                intent.putExtra(PINS_LIST, (Serializable) pinsList);
                 startActivity(intent);
-
             }
         });
     }
@@ -189,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, BoardsActivity.class);
-                intent.putExtra("BOARDS_LIST", (Serializable) boardsList);
+                intent.putExtra(BOARD_LIST, (Serializable) boardsList);
                 startActivity(intent);
             }
         });
